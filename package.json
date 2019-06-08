@@ -1,0 +1,17 @@
+{
+  "name": "radiojavan-dl",
+  "version": "1.0.0",
+  "description": "A simple node script which downloads a song from radiojavan.com.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mohsen Taleb <mohsentaleb@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "progress": "^2.0.3",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
+}
