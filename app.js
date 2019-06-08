@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const chalk = require('chalk');
 const request = require('request-promise');
 const ProgressBar = require('progress');

@@ -1,10 +1,13 @@
 {
   "name": "radiojavan-dl",
-  "version": "1.0.0",
-  "description": "A simple node script which downloads a song from radiojavan.com.",
+  "version": "1.0.1",
+  "description": "This tool simply allows you download a song from RadioJavan website.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "radiojavan-dl": "./app.js"
   },
   "author": "Mohsen Taleb <mohsentaleb@gmail.com>",
   "license": "ISC",
