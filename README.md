@@ -1,26 +1,25 @@
 # Radio Javan Downloader
 This tool simply allows you download a song from [RadioJavan](https://www.radiojavan.com) website. Downloading album/playlist is not supported yet but I'm planning to do that in near future.
 
-# Installation
+# Running as CLI
+## Installation
 ```shell
-git clone https://github.com/mohsentaleb/radiojavan-dl.git
-cd radiojavan-dl
-npm install
+npm install radiojavan-dl -g
 ```
 
-# Usage
-```shell
-node app.js <url> [<directory>]
+## Usage
 ```
-Example:
-```shell
-node app.js https://www.radiojavan.com/mp3s/mp3/Ebi-Jane-Javani
+radiojavan-dl <song-url> [<directory>]
 ```
-**Note:** If you want to download the file in a directory *relative* to your working directory just provide it as the third param in your command:
+Example: 
 ```shell
-node app.js https://www.radiojavan.com/mp3s/mp3/Ebi-Jane-Javani temp
+radiojavan-dl https://www.radiojavan.com/mp3s/mp3/Ebi-Jane-Javani
 ```
-This will put `Ebi-Jane-Javani.mp3` in `./temp`.
+This will save `Ebi-Jane-Javani.mp3` in your current directory. However if you want to save it in a different directory, provide it as the second parameter.
+```shell
+radiojavan-dl https://www.radiojavan.com/mp3s/mp3/Ebi-Jane-Javani temp
+```
+Which will store the file under `./temp`
 
 # Licence
 MIT

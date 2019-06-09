@@ -1,6 +1,6 @@
 {
   "name": "radiojavan-dl",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This tool simply allows you download a song from RadioJavan website.",
   "main": "app.js",
   "scripts": {
