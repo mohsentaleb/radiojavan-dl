@@ -1,7 +1,7 @@
 {
   "name": "radiojavan-dl",
-  "version": "1.0.3",
-  "description": "This tool simply allows you download a song from RadioJavan website.",
+  "version": "1.0.4",
+  "description": "This tool simply allows you download a song or a podcast from RadioJavan website.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
