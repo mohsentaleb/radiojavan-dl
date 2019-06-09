@@ -39,7 +39,12 @@ async function getDownloadLink(fileName, mediaType) {
         return songURL;
 
     } catch(err) {
-        console.log(err);
+        if (err.name === 'RequestError') {
+            console.log('There was a problem connecting to radiojavan servers. Please check your internet connection OR be sure you are using a proxy if you are in Iran :)');
+            process.exit(1);
+        } else {
+            console.log(err);
+        }
     }
 }
 

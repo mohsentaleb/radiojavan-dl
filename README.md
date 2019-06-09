@@ -9,7 +9,7 @@ npm install radiojavan-dl -g
 
 ## Usage
 ```
-radiojavan-dl <song-url> [<directory>]
+radiojavan-dl <song-url|podcast-url> [<directory>]
 ```
 Example: 
 ```shell
