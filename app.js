@@ -6,7 +6,7 @@ const https = require('https');
 const fs = require('fs');
 
 if (process.argv.length < 3) {
-    console.log(`Usage: node app.js <url> [<directory>]\n\rExample: ${chalk.blue('node app.js https://www.radiojavan.com/mp3s/mp3/Edvin-Beshmar-3')}`);
+    console.log(`Usage: radiojavan-dl <song-url> [<directory>]\n\rExample: ${chalk.blue('radiojavan-dl https://www.radiojavan.com/mp3s/mp3/Ebi-Jane-Javani')}`);
     process.exit(1);
 }
 
@@ -29,6 +29,7 @@ async function getDownloadLink(fileName) {
 }
 
 (async() => {
+    
     const fileName = process.argv[2].split('/')[5];
     const dirName = process.argv[3] || '.';
     const songURL = await getDownloadLink(fileName);

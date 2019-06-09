@@ -1,6 +1,6 @@
 {
   "name": "radiojavan-dl",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This tool simply allows you download a song from RadioJavan website.",
   "main": "app.js",
   "scripts": {
@@ -16,5 +16,12 @@
     "progress": "^2.0.3",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohsentaleb/radiojavan-dl.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mohsentaleb/radiojavan-dl/issues"
   }
 }
