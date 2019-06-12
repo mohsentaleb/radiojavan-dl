@@ -5,42 +5,55 @@ const ProgressBar = require('progress');
 const https = require('https');
 const fs = require('fs');
 
-if (process.argv.length < 3) {
-    console.log(`Usage: radiojavan-dl <song-url|podcast-url> [<directory>]\n\rExample: ${chalk.blue('radiojavan-dl https://www.radiojavan.com/mp3s/mp3/Ebi-Jane-Javani')}`);
-    process.exit(1);
-}
+async function processLink(link, dirName = '.') {
+    let mediaType = link.split('/')[4];
+    let fileName = link.split('/')[5];
 
-async function getDownloadLink(fileName, mediaType) {
+    // When playing a playlist or songs of a specific artist, url may have some extra parameters. Let's get rid of them first
+    let urlParams = fileName.indexOf('?');
+    if (urlParams !== -1) {
+        fileName = fileName.substr(0, urlParams);
+    }
+
     try {
         let uri, songURL, result;
 
         switch (mediaType) {
-            case "podcasts":
+            case "podcast":
                 uri = 'https://www.radiojavan.com/podcasts/podcast_host/?id=';
-                result = await request({
-                    "method": "GET",
-                    "uri": uri + fileName,
-                    "json": true
-                });
+                result = await request({"method": "GET", "uri": uri + fileName,"json": true});
                 songURL = `${result.host}/media/podcast/mp3-256/${fileName}.mp3`;
-
+                console.log('Downloading ' + mediaType, chalk.blue(songURL));
+                downloadFileWithProgressBar(songURL, fileName, dirName);
                 break;
         
-            case "mp3s":
+            case "mp3":
                 uri = 'https://www.radiojavan.com/mp3s/mp3_host/?id=';
-                result = await request({
-                    "method": "GET",
-                    "uri": uri + fileName,
-                    "json": true
-                });
+                result = await request({ "method": "GET", "uri": uri + fileName, "json": true });
                 songURL = `${result.host}/media/mp3/${fileName}.mp3`;
+                console.log('Downloading ' + mediaType, chalk.blue(songURL));
+                downloadFileWithProgressBar(songURL, fileName, dirName);
                 break;
-        }
-        return songURL;
+            case "playlist": 
+                console.log('downloading playlist is not supported yet.');
+                process.exit(0);
 
+                /* var req = https.request(link, function (res) {
+                    var data = '';
+                    res.on('data', function (chunk) {data += chunk;});
+                    res.on('end', function () {
+                         var links = extractLinks(data);
+                         console.log(links);
+                    });
+                });
+                req.on('error', function (e) {
+                    console.log(e.message);
+                });
+                req.end(); */
+        }
     } catch(err) {
         if (err.name === 'RequestError') {
-            console.log('There was a problem connecting to radiojavan servers. Please check your internet connection OR be sure you are using a proxy if you are in Iran :)');
+            console.log('There was a problem connecting to radiojavan servers. Please check your internet connection OR if you are in Iran you know what to do :)');
             process.exit(1);
         } else {
             console.log(err);
@@ -48,40 +61,40 @@ async function getDownloadLink(fileName, mediaType) {
     }
 }
 
-(async() => {
-    const mediaType = process.argv[2].split('/')[3];
-    const fileName = process.argv[2].split('/')[5];
-    const dirName = process.argv[3] || '.';
-    const songURL = await getDownloadLink(fileName, mediaType);
-    console.log(songURL);
+function downloadFileWithProgressBar(url, fileName, dirName) {
+    var req = https.request(url);
 
-    var req = https.request(songURL);
-    var dir = dirName;
-
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir);
+    if (!fs.existsSync(dirName)) {
+        fs.mkdirSync(dirName);
     }
-    const file = fs.createWriteStream(`${dir}/${fileName}.mp3`);
-
+    const file = fs.createWriteStream(`${dirName}/${fileName}.mp3`);
     req.on('response', function (res) {
         var len = parseInt(res.headers['content-length'], 10);
+        var humanReadableLen = (len / 1048576).toFixed(1) + ' MiB';
         res.pipe(file);
-
-        var bar = new ProgressBar('  Downloading '+fileName+' [:bar] :rate/bps :percent | Remaining Time: :etas', {
+        var bar = new ProgressBar(humanReadableLen + ' [:bar] :rate :percent | Remaining Time: :etas', {
             complete: '=',
             incomplete: ' ',
             width: 40,
-            total: len
+            total: len,
+            humanFriendlyRate: true
         });
-
         res.on('data', function (chunk) {
             bar.tick(chunk.length);
         });
-
         res.on('end', function () {
-            console.log(`\n${chalk.green(`Download complete.`)} ${dir}/${fileName}.mp3`);
+            console.log(`\n${chalk.green(`Download complete.`)} ${dirName}/${fileName}.mp3`);
         });
     });
-
     req.end();
-})();
+}
+
+if (process.argv.length < 3) {
+    console.log(`Usage: radiojavan-dl <song-url|podcast-url> [<directory>]
+Example: ${chalk.blue('radiojavan-dl https://www.radiojavan.com/mp3s/mp3/Ebi-Jane-Javani')}
+         ${chalk.blue('radiojavan-dl https://www.radiojavan.com/podcasts/podcast/Dubways-103')}`);
+    process.exit(1);
+}
+const link = process.argv[2];
+const directory = process.argv[3]
+processLink(link, directory);
