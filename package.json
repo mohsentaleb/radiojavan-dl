@@ -1,7 +1,7 @@
 {
   "name": "radiojavan-dl",
-  "version": "1.0.6",
-  "description": "This tool simply allows you download a song or a podcast from RadioJavan website.",
+  "version": "1.1.0",
+  "description": "This tool simply allows you download a song, podcast, or an entire playlist from RadioJavan website. ",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,9 +13,10 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^2.4.2",
+    "got": "^9.6.0",
+    "p-queue": "^6.0.2",
     "progress": "github:mohsentaleb/node-progress",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.4"
+    "request": "^2.88.0"
   },
   "repository": {
     "type": "git",

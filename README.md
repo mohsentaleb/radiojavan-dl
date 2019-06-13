@@ -1,15 +1,14 @@
 # Radio Javan Downloader
-This tool simply allows you download a song from [RadioJavan](https://www.radiojavan.com) website. Downloading album/playlist is not supported yet but I'm planning to do that in near future.
+This tool simply allows you download a song, podcast, or an entire playlist from [RadioJavan](https://www.radiojavan.com) website. 
 
 # Running as CLI
 ## Installation
 ```shell
 npm install radiojavan-dl -g
 ```
-
 ## Usage
 ```
-radiojavan-dl <song-url|podcast-url> [<directory>]
+radiojavan-dl <song-url|podcast-url|playlist-url> [<directory>]
 ```
 Example: 
 ```shell
