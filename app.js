@@ -3,7 +3,7 @@ const chalk = require('chalk');
 const RadioJavan = require('./helpers/radiojavan');
 
 if (process.argv.length < 3) {
-    console.log(`Usage: radiojavan-dl <song-url|podcast-url> [<directory>]
+    console.log(`Usage: radiojavan-dl <song-url|podcast-url|playlist-url> [<directory>]
 Examples: ${chalk.blue('radiojavan-dl https://www.radiojavan.com/mp3s/mp3/Ebi-Jane-Javani')}
           ${chalk.blue('radiojavan-dl https://www.radiojavan.com/podcasts/podcast/Dubways-103')}
           ${ chalk.blue('radiojavan-dl https://www.radiojavan.com/playlists/playlist/mp3/25638be976b4')}`);
